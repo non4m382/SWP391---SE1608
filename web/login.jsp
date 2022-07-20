@@ -9,8 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        
         <link rel="stylesheet" href="assets/css/homepage.css"/>
+        
+        <link rel="icon" href="./assets/image/logo2-removebg-preview.png">
+        <title>ATKD ChildCare</title>
         <script src="https://kit.fontawesome.com/28a1dc3e10.js" crossorigin="anonymous"></script>
         <script src="assets/js/homepage.js"></script>
     </head>

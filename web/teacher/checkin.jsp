@@ -13,7 +13,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <link rel="icon" href="./assets/image/logo2-removebg-preview.png">
+        <title>ATKD ChildCare</title>
         <link rel="stylesheet" href="teacher/css/teacherhome.css">
         <script src="https://kit.fontawesome.com/67b5c45612.js" crossorigin="anonymous"></script>
         <script src="teacher/js/teacherhome.js"></script>
@@ -161,21 +162,28 @@
                                         </div>
                                     </c:forEach>
                                 </div>
-                                <input type="hidden" name="attendanceStatus" id="attendanceStatus"/>
+                                <input type="hidden" name="attendanceStatus" id="attendanceStatus" />
                                 <div class="submit-btn">
                                     <input type="submit" name="Save" value="Save"/>
                                 </div>
                             </form>
                         </div>
-                        <c:if test="${requestScope.announcement != null}">
+                        <c:if test="${requestScope.announcement != null || sessionScope.message != null}">
                             <div id="popup1" class="overlay">
                                 <div class="popup"> 
                                     <div class="warning-icon">
                                         <i class="fa-solid fa-circle-exclamation"></i>
                                     </div>
-                                    <div class="content">
-                                        ${requestScope.announcement}
-                                    </div>
+                                    <c:if test="${requestScope.announcement != null}">
+                                        <div class="content">
+                                            ${requestScope.announcement}
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${sessionScope.message != null}">
+                                        <div class="content">
+                                            ${sessionScope.message}
+                                        </div>
+                                    </c:if>
                                     <div class="close-btn" id="close">
                                         <i class="fa-solid fa-xmark"></i>
                                     </div>
@@ -192,7 +200,7 @@
             document.getElementById("myform").submit();
         };
 
-        if (${requestScope.announcement!= null}) {
+        if (${requestScope.announcement != null || sessionScope.message != null}) {
             window.addEventListener("load", function () {
                 setTimeout(
                         function open(event) {
@@ -202,10 +210,12 @@
                         1000
                         );
             });
-
             document.querySelector("#close").addEventListener("click", function () {
+                <%
+                    session.removeAttribute("message");
+                %>
                 document.querySelector(".popup").style.display = "none";
-                document.querySelector(".overlay").style.visibility = "invisible";
+                document.querySelector(".overlay").style.visibility = "hidden";
                 document.querySelector(".overlay").style.opacity = "0";
             });
         }

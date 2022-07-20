@@ -7,7 +7,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <link rel="icon" href="./assets/image/logo2-removebg-preview.png">
+        <title>ATKD ChildCare</title>
         <link rel="stylesheet" href="/ATKD_Project/parent/css/parenthome.css">
         <link rel="stylesheet" href="/ATKD_Project/parent/css/childprofile.css">
         <link rel="stylesheet" href="/ATKD_Project/parent/css/childfb.css">

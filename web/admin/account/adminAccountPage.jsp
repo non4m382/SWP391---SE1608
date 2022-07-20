@@ -20,6 +20,9 @@
         <link rel="stylesheet" href="admin/account/css/style.css">
         <link rel="stylesheet" href="admin/account/boot/bootstrap.min.css">
         <link rel="stylesheet" href="admin/account/boot/bootstrap.css">
+        
+        <link rel="icon" href="./assets/image/logo2-removebg-preview.png">
+        <title>ATKD ChildCare</title>
         <!----===== Iconscout CSS ===== -->
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
@@ -48,7 +51,7 @@
                                 <i class="uil uil-chart"></i>
                                 <span class="link-name">Kindergartner</span>
                             </a></li>
-                        <li><a href="#">
+                        <li><a href="listclass">
                                 <i class="uil uil-thumbs-up"></i>
                                 <span class="link-name">Class</span>
                             </a></li>
@@ -56,10 +59,10 @@
                                 <i class="uil uil-comments"></i>
                                 <span class="link-name">Schedule</span>
                             </a></li>
-                        <li><a href="#">
+<!--                        <li><a href="#">
                                 <i class="uil uil-share"></i>
                                 <span class="link-name">Attendance</span>
-                            </a></li>
+                            </a></li>-->
                     </ul>
 
                     <ul class="logout-mode">
@@ -101,9 +104,9 @@
                         </select>
 
                     </div>
-                    <div>
-                        <button  type="submit" style="width: 40%;margin-left: 70px;margin-top: 20px;"><a href="addaccount" style="text-decoration: none">Add</a> </button> 
-                    </div>
+                    <!--                    <div>
+                                            <button  type="submit" style="width: 40%;margin-left: 70px;margin-top: 20px;"><a href="addaccount" style="text-decoration: none">Add</a> </button> 
+                                        </div>-->
                 </div>
 
 
@@ -121,8 +124,8 @@
                                 <th scope="col">Dob</th>
                                 <th scope="col">Phone Number</th>
                                 <th scope="col">Address</th>
-                                <th scope="col">Img</th>
-                                <th scope="col">Role_id</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Role</th>
                                 <th scope="col">Update</th>
                                 <th scope="col">Delete</th>
 
@@ -148,7 +151,15 @@
                                     <td>${t.dob}</td>
                                     <td>${t.phoneNumber}</td>
                                     <td>${t.address}</td>
-                                    <td><img src="${t.img}" alt="hình ảnh"/></td>
+                                    <td>
+                                        <c:if test="${t.img == null || t.img.isEmpty() }" >
+                                            <img src="admin/account/images/avtClone.jpg" style="height: 96px; width: 96px"/>
+                                        </c:if>    
+                                        <c:if test="${t.img != null}" >
+                                            <img src="${t.img}"/>
+                                            
+                                        </c:if>
+                                    </td>
 
                                     <td>
                                         ${t.role.roleName}

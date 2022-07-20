@@ -56,7 +56,7 @@ public class Homepage extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-        response.sendRedirect("index_1.html");
+        response.sendRedirect("index.html");
     }
 
     /**

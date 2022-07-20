@@ -13,7 +13,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <link rel="icon" href="./assets/image/logo2-removebg-preview.png">
+        <title>ATKD ChildCare</title>
         <link rel="stylesheet" href="teacher/css/teacherhome.css">
         <link rel="stylesheet" href="teacher/css/kidprofile.css">
         <link rel="stylesheet" href="teacher/css/feedback.css">
@@ -33,9 +34,9 @@
                                 <li class="menu-item">
                                     <a href="loadteacherhome">Home</a>
                                 </li>
-                                <li class="menu-item">
+<!--                                <li class="menu-item">
                                     <a href="#">View schedule</a>
-                                </li>
+                                </li>-->
                                 <li class="menu-item current1">
                                     <a href="#" style="color: #fff;">View student</a>
                                 </li>

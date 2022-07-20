@@ -13,7 +13,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <link rel="icon" href="./assets/image/logo2-removebg-preview.png">
+        <title>ATKD ChildCare</title>
         <link rel="stylesheet" href="teacher/css/teacherhome.css">
         <script src="https://kit.fontawesome.com/67b5c45612.js" crossorigin="anonymous"></script>
         <script src="teacher/js/teacherhome.js"></script>
@@ -43,9 +44,9 @@
                                 <li class="menu-item current1">
                                     <a href="attendance" style="color: #fff;">Home</a>
                                 </li>
-<!--                                <li class="menu-item">
-                                    <a href="schedule.html">View schedule</a>
-                                </li>-->
+                                <!--                                <li class="menu-item">
+                                                                    <a href="schedule.html">View schedule</a>
+                                                                </li>-->
                             </ul>
                         </div>
                         <div class="log-out">
@@ -86,14 +87,14 @@
                                             <a href="#" style="color: #fff;">Check out</a>
                                         </div>
                                     </div>
-<!--                                    <div class="student-filter">
-                                        <div class="filter-item ${!requestScope.filter.equals("absent")?"current1":""}">
-                                            <a href="checkattendance?action=checkin&filteritem=getall&checkindate=${checkindate}" style="color: ${!requestScope.filter.equals("absent")?"#fff":""};">All</a>
-                                        </div>
-                                        <div class="filter-item ${requestScope.filter.equals("absent")?"current1":""}">
-                                            <a href="checkattendance?action=checkin&filteritem=absent&checkindate=${checkindate}" style="color: ${requestScope.filter.equals("absent")?"#fff":""};">Absent only</a>
-                                        </div>
-                                    </div>-->
+                                    <!--                                    <div class="student-filter">
+                                                                            <div class="filter-item ${!requestScope.filter.equals("absent")?"current1":""}">
+                                                                                <a href="checkattendance?action=checkin&filteritem=getall&checkindate=${checkindate}" style="color: ${!requestScope.filter.equals("absent")?"#fff":""};">All</a>
+                                                                            </div>
+                                                                            <div class="filter-item ${requestScope.filter.equals("absent")?"current1":""}">
+                                                                                <a href="checkattendance?action=checkin&filteritem=absent&checkindate=${checkindate}" style="color: ${requestScope.filter.equals("absent")?"#fff":""};">Absent only</a>
+                                                                            </div>
+                                                                        </div>-->
                                 </div>
                             </div>
                         </div>
@@ -159,20 +160,24 @@
                                         </div>
                                     </c:forEach>
                                     <input type="hidden" name="attendanceStatus" id="attendanceStatus"/>
-                                    <div class="submit-btn">
-                                        <input type="submit" name="Save" value="Save"/>
-                                    </div>
+
+                                </div>
+                                <div class="submit-btn">
+                                    <input type="submit" name="Save" value="Save"/>
                                 </div>
                             </form>
                         </div>
-                        <c:if test="${requestScope.message !=null}">
-                            <div class="popup" id="xspopup">
-                                <div class="popup-content">
-                                    <div class="close" id="close-btn">
-                                        <i class="fa-solid fa-xmark" onclick="closeBox()"></i>
+                        <c:if test="${sessionScope.announcement != null}">
+                            <div id="popup1" class="overlay">
+                                <div class="popup"> 
+                                    <div class="warning-icon">
+                                        <i class="fa-solid fa-circle-exclamation"></i>
                                     </div>
-                                    <div class="message">
-                                        <h3 style="color: red;">${requestScope.message}</h3>
+                                    <div class="content">
+                                        ${sessionScope.announcement}
+                                    </div>  
+                                    <div class="close-btn" id="close">
+                                        <i class="fa-solid fa-xmark"></i>
                                     </div>
                                 </div>
                             </div>
@@ -188,9 +193,25 @@
             document.getElementById("myform").submit();
         };
 
-//        document.getElementById('close-btn').onclick = function () {
-//            document.getElementById('xspopup').style.display = "none";
-//        };
+        if (${sessionScope.announcement != null}) {
+            window.addEventListener("load", function () {
+                setTimeout(
+                        function open(event) {
+                            document.querySelector(".overlay").style.visibility = "visible";
+                            document.querySelector(".overlay").style.opacity = "1";
+                        },
+                        1000
+                        );
+            });
+            document.querySelector("#close").addEventListener("click", function () {
+        <%
+                    session.removeAttribute("announcement");
+        %>
+                document.querySelector(".popup").style.display = "none";
+                document.querySelector(".overlay").style.visibility = "hidden";
+                document.querySelector(".overlay").style.opacity = "0";
+            });
+        }
 
         var stumap = new Map();
         var a1 = '${requestScope.studentMap}'.slice(1, -1).split(", ");

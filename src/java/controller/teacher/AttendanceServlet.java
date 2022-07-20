@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.teacher;
 
 import dal.AttendanceDAO;
@@ -25,7 +21,7 @@ import model.KinderRecordStudy;
  *
  * @author Windows 10 TIMT
  */
-public class CheckOutServlet extends HttpServlet {
+public class AttendanceServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +40,10 @@ public class CheckOutServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet checkOutServlet</title>");
+            out.println("<title>Servlet attendanceServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet checkOutServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet attendanceServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -68,20 +64,25 @@ public class CheckOutServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         Class kinderClass = (Class) session.getAttribute("kinder_class");
         Account acc = (Account) session.getAttribute("account");
-//        KindergartnerDAO kinderDao = new KindergartnerDAO();
+        KindergartnerDAO kinderDao = new KindergartnerDAO();
         AttendanceDAO attdao = new AttendanceDAO();
         if (acc != null) {
             String checkindate = LocalDate.now().toString();
-            List<KinderRecordStudy> listKinder = attdao.getAllCheckInKidsOfADay(kinderClass.getClass_id(), checkindate);
+            List<KinderRecordStudy> listKinder = kinderDao.getKidsByClass(kinderClass.getClass_id());
+            if (listKinder.isEmpty()) {
+                request.setAttribute("announcement", "Your schedule have not yet initiated.</br> Please contact Management Department for further information!");
+                request.getRequestDispatcher("teacher/checkin.jsp").forward(request, response);
+            }
             LinkedHashMap<Integer, Integer> map = new LinkedHashMap<>();
             for (KinderRecordStudy kinderRecordStudy : listKinder) {
-                map.put(kinderRecordStudy.getKinder().getKinder_id(), 1);
+
+                map.put(kinderRecordStudy.getKinder().getKinder_id(), 0);
             }
             List<Attendance> attendances = attdao.getAllAttendanceOfInputDay(checkindate);
             if (!attendances.isEmpty()) {
                 for (Attendance a : attendances) {
-                    if (a.getStatus() == 2) {
-                        map.replace(a.getKinder().getKinder_id(), 2);
+                    if (a.getStatus() != 0) {
+                        map.replace(a.getKinder().getKinder_id(), 1);
                     }
                 }
             }
@@ -90,10 +91,9 @@ public class CheckOutServlet extends HttpServlet {
             request.setAttribute("listKinder", listKinder);
             request.setAttribute("isPast", false);
             request.setAttribute("present_kids", attendances);
-            request.getRequestDispatcher("teacher/checkout.jsp").forward(request, response);
+            request.getRequestDispatcher("teacher/checkin.jsp").forward(request, response);
         } else {
-            request.setAttribute("error", "Do you want to create an account?");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            response.sendRedirect("login");
         }
     }
 
@@ -109,7 +109,6 @@ public class CheckOutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        session.removeAttribute("announcement");
         Account teacher = (Account) session.getAttribute("account");
         String attendanceStrRaw = request.getParameter("attendanceStatus");
         AttendanceDAO attdao = new AttendanceDAO();
@@ -119,13 +118,18 @@ public class CheckOutServlet extends HttpServlet {
             for (String string : attendanceStr) {
                 int kinderId = Integer.parseInt(string.substring(0, string.indexOf(":")));
                 int status = Integer.parseInt(string.substring(string.indexOf(":") + 1, string.length()));
-                attdao.updateAttendanceInfor(status, kinderId, today);
+                Attendance att = attdao.checkAttendance(kinderId, today);
+                if (att != null) {
+                    attdao.updateAttendanceInfor(status, kinderId, today);
+                } else {
+                    attdao.insertAttendanceInfor(kinderId, today, status, teacher.getAccountID());
+                }
             }
-        }else{
-            session.setAttribute("announcement", "You have not checked out yet!");
+        } else {
+            session.setAttribute("message", "You have not taken attendance yet!");
         }
+        response.sendRedirect("attendance");
 
-        response.sendRedirect("checkout");
     }
 
     /**

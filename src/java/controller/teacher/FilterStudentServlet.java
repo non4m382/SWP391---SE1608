@@ -17,12 +17,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 import model.Account;
 import model.Attendance;
 import model.Class;
 import model.KinderRecordStudy;
-import model.Kindergartner;
+//import model.Kindergartner;
 
 /**
  *
@@ -85,8 +85,8 @@ public class FilterStudentServlet extends HttpServlet {
             }
             List<KinderRecordStudy> listKinderOuput = new ArrayList<>();
             for (KinderRecordStudy kinderRecordStudy : listKinder) {
-                String fulname = kinderRecordStudy.getKinder().getFirst_name() + kinderRecordStudy.getKinder().getLast_name();
-                if (fulname.contains(checkbar)) {
+                String fulname = kinderRecordStudy.getKinder().getFirst_name()+"+"+kinderRecordStudy.getKinder().getLast_name();
+                if (fulname.equalsIgnoreCase(checkbar) || fulname.contains(checkbar)) {
                     listKinderOuput.add(kinderRecordStudy);
                 }
             }

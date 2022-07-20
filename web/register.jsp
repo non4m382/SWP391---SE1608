@@ -14,13 +14,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Register</title>
+        <link rel="icon" href="./assets/image/logo2-removebg-preview.png">
+        <title>ATKD ChildCare</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
               integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-              crossorigin="anonymous" />
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
               integrity="sha512-Oy+sz5W86PK0ZIkawrG0iv7XwWhYecM3exvUtMKNJMekGFJtVAhibhRPTpmyTj8+lJCkmWfnpxKgT2OopquBHA=="
@@ -181,7 +181,7 @@
             }
 
             /*//////////////////////////////////////////////////////////////////
-            [ Utility ]*/
+                [ Utility ]*/
             .txt1 {
                 font-size: 13px;
                 line-height: 1.5;
@@ -195,7 +195,7 @@
             }
 
             /*//////////////////////////////////////////////////////////////////
-            [ login ]*/
+                [ login ]*/
 
             .limiter {
                 width: 100%;
@@ -221,7 +221,7 @@
                 background-repeat: no-repeat;
                 background-position: top;
                 box-shadow: inset 0 0 0 2000px rgb(0 0 0 / 50%);
-                background: url("assets/image/RegisterBackground.jpg");
+                background: url("assets/image/register.jpg");
             }
 
             .symbol-input100 {
@@ -268,41 +268,8 @@
             }
 
             /*------------------------------------------------------------------
-            [  ]*/
-            .login100-pic {
-                width: 316px;
-                text-align: justify;
-                margin-top: -115px;
-                background-color: #e1d1abe8;
-                padding: 16px;
-                border-radius: 16px;
-            }
-
-            .login100-pic p{
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                color: black;
-                font-size: 20px;
-            }
-
-            .p{
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                color: black;
-                font-size: 20px;
-            }
-
-            #para1{
-                margin: auto;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-
-            .login100-pic img {
-                max-width: 100%;
-                margin-top: 32px;
-            }
-
             /*------------------------------------------------------------------
-            [  ]*/
+                [  ]*/
             .login100-form {
                 width: 290px;
             }
@@ -347,6 +314,7 @@
                 z-index: 1;
                 margin-bottom: 10px;
             }
+
             select {
                 font-size: 15px;
                 line-height: 1.5;
@@ -406,7 +374,7 @@
             }
 
             /*------------------------------------------------------------------
-            [ Focus ]*/
+                [ Focus ]*/
             .focus-input100 {
                 display: block;
                 position: absolute;
@@ -426,7 +394,7 @@
             }
 
             /*------------------------------------------------------------------
-            [ Button ]*/
+                [ Button ]*/
             .container-login100-form-btn {
                 width: 100%;
                 display: -webkit-box;
@@ -468,7 +436,7 @@
             }
 
             /*------------------------------------------------------------------
-            [ Responsive ]*/
+                [ Responsive ]*/
 
             @media (max-width: 992px) {
                 .wrap-login100 {
@@ -506,7 +474,7 @@
             }
 
             /*------------------------------------------------------------------
-            [ Alert validate ]*/
+                [ Alert validate ]*/
 
             .validate-input {
                 position: relative;
@@ -589,11 +557,58 @@
             .name {
                 display: flex;
             }
-            .invalid {
-                color: red;
-                margin-left: 22px;
+
+            /* Chat Bubbles */
+            .chat-bubbles {
+                margin-left: -130px;
+                margin-bottom: 315px;
+            }
+
+            .message p {
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+
+            .message span {
+                padding: 10px;
+                margin-bottom: 15px;
+                font-size: 14px;
+                line-height: 1.7;
+                color: #666666;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            #phoneinvalid {
+                margin-bottom: 10px;
+            }
+
+            .bubbles {
+                visibility: hidden;
+                position: relative;
+                background: rgb(207, 199, 199);
+                color: #222;
+                border-radius: 3px;
+                margin-left: 20px;
+            }
+
+            .bubbles::after {
+                content: "";
+                display: block;
+                position: absolute;
+                left: -15px;
+                top: 15px;
+                width: 0;
+                height: 0;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-right: 15px solid rgb(207, 199, 199);
+            }
+
+            #phoneinvalid.message.bubbles::after {
+                top: 40px;
             }
         </style>
+
     <body>
         <div class="limiter">
             <div class="container-login100">
@@ -613,10 +628,6 @@
                                 <i class="fa-solid fa-circle-user"></i>
                             </span>
                         </div>
-                        <span class="invalid" id="fnameinvalid1" style="display: none;">Name cannot contain
-                            numeric characters</span>
-                        <span class="invalid" id="fnameinvalid2" style="display: none;">Name cannot contain
-                            special characters</span>
 
                         <div class="wrap-input100 validate-input">
                             <input class="input100" type="text" pattern="[a-zA-Z]+" title="Alphabetical letters only"
@@ -626,10 +637,7 @@
                                 <i class="fa-solid fa-circle-user"></i>
                             </span>
                         </div>
-                        <span class="invalid" id="lnameinvalid1" style="display: none;">Name cannot contain
-                            numeric characters</span>
-                        <span class="invalid" id="lnameinvalid2" style="display: none;">Name cannot contain
-                            special characters</span>
+
                         <!-- Gender -->
                         <div class="wrap-input100 validate-input">
                             <select name="gender">
@@ -655,13 +663,7 @@
                             <span class="symbol-input100"><i class="fa-solid fa-mobile-button"></i>
                             </span>
                         </div>
-                        <span class="invalid" id="phoneinvalid1" style="display: none;">Phone numbers cannot contain
-                            alphabetical characters</span>
-                        <span class="invalid" id="phoneinvalid2" style="display: none;">Phone numbers cannot contain
-                            special characters</span>
-                        <span class="invalid" id="phoneinvalid3" style="display: none;">Phone numbers must contain 10 characters</span>
-                        <span class="invalid" id="phoneinvalid4" style="display: none;">Phone numbers must start with
-                            09/03/07/08/05</span>
+
                         <!-- Email -->
                         <div class="wrap-input100 validate-input">
                             <input class="input100" type="text" name="email" id="email" placeholder="Email"
@@ -669,8 +671,7 @@
                             <span class="focus-input100"></span>
                             <span class="symbol-input100"><i class="fa-solid fa-envelope"></i>
                             </span>
-                            <span class="invalid" id="emailinvalid" style="display: none;">Email must contain
-                                @</span>
+
                         </div>
                         <!-- DOB -->
                         <div class="wrap-input100 validate-input">
@@ -681,8 +682,8 @@
                         </div>
                         <!-- Password -->
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" type="password" name="password" id="password"
-                                   placeholder="Password" required />
+                            <input class="input100" type="password" name="password" id="password" placeholder="Password"
+                                   required />
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-lock" aria-hidden="true"></i>
@@ -719,11 +720,24 @@
                             </a>
                         </div>
                     </form>
-
-                    <div class="login100-pic">
-                        <p id="para1">We are living in the Digital Age, and our daily lives are heavily influenced by technology.</p>
-                        <p id="para2">Therefore, websites aimed at educational organizations, such as our ATKD Kindergarten System is vital...</p>
-                        <img src="assets/image/QuoteRegisterPage.jpg"/>
+                    <div class="chat-bubbles">
+                        <div class="message bubbles" id="fnameinvalid">
+                            <p>Names cannot contain numeric or special characters</p>
+                        </div>
+                        <div class="message bubbles" id="lnameinvalid">
+                            <p>Names cannot contain numeric or special characters</p>
+                        </div>
+                        <div class="message bubbles">
+                            <br /><br /><br /><br />
+                        </div>
+                        <div class="message bubbles" id="phoneinvalid">
+                            <span>Phone numbers cannot contain alphabetical characters, </span><br />
+                            <span> special characters, must start with 09/03/07/08/05 and</span><br />
+                            <span> contain exactly 10 characters</span>
+                        </div>
+                        <div class="message bubbles" id="emailinvalid">
+                            <p>Emails must contain '@'</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -739,64 +753,67 @@
 
             fname.onkeyup = function () {
                 var numbers = /[0-9]/g;
-                if (fname.value.match(numbers)) {
-                    document.getElementById("fnameinvalid1").style.display = "block";
-                } else {
-                    document.getElementById("fnameinvalid1").style.display = "none";
-                }
                 var specs = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-                if (fname.value.match(specs)) {
-                    document.getElementById("fnameinvalid2").style.display = "block";
+                if (fname.value.match(numbers) || fname.value.match(specs)) {
+                    document.getElementById("fnameinvalid").style.visibility = "visible";
                 } else {
-                    document.getElementById("fnameinvalid2").style.display = "none";
+                    document.getElementById("fnameinvalid").style.visibility = "hidden";
                 }
+
             }
 
             lname.onkeyup = function () {
                 var numbers = /[0-9]/g;
-                if (lname.value.match(numbers)) {
-                    document.getElementById("lnameinvalid1").style.display = "block";
-                } else {
-                    document.getElementById("lnameinvalid1").style.display = "none";
-                }
                 var specs = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-                if (lname.value.match(specs)) {
-                    document.getElementById("lnameinvalid2").style.display = "block";
+                if (lname.value.match(numbers) || lname.value.match(specs)) {
+                    document.getElementById("lnameinvalid").style.visibility = "visible";
                 } else {
-                    document.getElementById("lnameinvalid2").style.display = "none";
+                    document.getElementById("lnameinvalid").style.visibility = "hidden";
                 }
             }
 
             phone.onkeyup = function () {
                 var letters = /[a-zA-Z]/g;
-                if (phone.value.match(letters)) {
-                    document.getElementById("phoneinvalid1").style.display = "block";
-                } else {
-                    document.getElementById("phoneinvalid1").style.display = "none";
-                }
                 var specs = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-                if (phone.value.match(specs)) {
-                    document.getElementById("phoneinvalid2").style.display = "block";
-                } else {
-                    document.getElementById("phoneinvalid2").style.display = "none";
-                }
-                if (phone.value.length !== 10) {
-                    document.getElementById("phoneinvalid3").style.display = "block";
-                } else {
-                    document.getElementById("phoneinvalid3").style.display = "none";
-                }
+
                 if (phone.value.startsWith("03") || phone.value.startsWith("05") || phone.value.startsWith("07") || phone.value.startsWith("08") || phone.value.startsWith("09")) {
-                    document.getElementById("phoneinvalid4").style.display = "none";
+                    if (phone.value.match(letters) || phone.value.match(specs) || phone.value.length !== 10) {
+                        document.getElementById("phoneinvalid").style.visibility = "visible";
+                    } else {
+                        document.getElementById("phoneinvalid").style.visibility = "hidden";
+                    }
                 } else {
-                    document.getElementById("phoneinvalid4").style.display = "block";
+                    document.getElementById("phoneinvalid").style.visibility = "visible";
                 }
+
+                // if (phone.value.match(letters)) {
+                //     document.getElementById("phoneinvalid1").style.display = "block";
+                // } else {
+                //     document.getElementById("phoneinvalid1").style.display = "none";
+                // }
+                // var specs = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+                // if (phone.value.match(specs)) {
+                //     document.getElementById("phoneinvalid2").style.display = "block";
+                // } else {
+                //     document.getElementById("phoneinvalid2").style.display = "none";
+                // }
+                // if (phone.value.length !== 10) {
+                //     document.getElementById("phoneinvalid3").style.display = "block";
+                // } else {
+                //     document.getElementById("phoneinvalid3").style.display = "none";
+                // }
+                // if (phone.value.startsWith("03") || phone.value.startsWith("05") || phone.value.startsWith("07") || phone.value.startsWith("08") || phone.value.startsWith("09")) {
+                //     document.getElementById("phoneinvalid4").style.display = "none";
+                // } else {
+                //     document.getElementById("phoneinvalid4").style.display = "block";
+                // }
             }
 
             email.onkeyup = function () {
                 if (email.value.includes('@') === true) {
-                    document.getElementById("emailinvalid").style.display = "none";
+                    document.getElementById("emailinvalid").style.visibility = "hidden";
                 } else {
-                    document.getElementById("emailinvalid").style.display = "block";
+                    document.getElementById("emailinvalid").style.visibility = "visible";
                 }
             }
         </script>

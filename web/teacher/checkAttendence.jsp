@@ -37,9 +37,9 @@
                                 <li class="menu-item ">
                                     <a href="attendance">Home</a>
                                 </li>
-<!--                                <li class="menu-item">
-                                    <a href="">View schedule</a>
-                                </li>-->
+                                <!--                                <li class="menu-item">
+                                                                    <a href="">View schedule</a>
+                                                                </li>-->
                                 <li class="menu-item current1">
                                     <a href="#" style="color: #fff;">View student</a>
                                 </li>
@@ -70,7 +70,7 @@
                                     <a href="#">Attendance</a>
                                 </div>
                                 <div class="feedback option-item">
-                                    <a href="studentinfor?action=feedback&kid_id=${kid.kinder_id}">Feedback</a>
+                                    <a href="studentinfor?action=feedback&kid_id=${kinder.kinder_id}">Feedback</a>
                                 </div>
                                 <div class="profile option-item">
                                     <a href="kidprofile?kid_id=${kinder.kinder_id}">Profile</a>
@@ -118,7 +118,13 @@
                                         <p></p>
                                     </div>
                                 </div>
+                                <div class="guide">
+                                    <i class="fa-solid fa-square" style="color: #EB5353;"><p>Absent or not take attendance yet</p></i>
+                                    <i class="fa-solid fa-square" style="color: #f0ef21;"><p>Checked in</p></i>
+                                    <i class="fa-solid fa-square" style="color: #36AE7C;"><p>Checked out</p></i>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

@@ -21,6 +21,9 @@
         <link rel="stylesheet" href="admin/kinder/css/style.css">
         <link rel="stylesheet" href="admin/kinder/boot/bootstrap.min.css">
         <link rel="stylesheet" href="admin/kinder/boot/bootstrap.css">
+        
+        <link rel="icon" href="./assets/image/logo2-removebg-preview.png">
+        <title>ATKD ChildCare</title>
         <!----===== Iconscout CSS ===== -->
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
@@ -50,7 +53,7 @@
                                 <i class="uil uil-chart"></i>
                                 <span class="link-name">Kindergartner</span>
                             </a></li>
-                        <li><a href="#">
+                        <li><a href="listclass">
                                 <i class="uil uil-thumbs-up"></i>
                                 <span class="link-name">Class</span>
                             </a></li>
@@ -58,10 +61,10 @@
                                 <i class="uil uil-comments"></i>
                                 <span class="link-name">Schedule</span>
                             </a></li>
-                        <li><a href="#">
+<!--                        <li><a href="#">
                                 <i class="uil uil-share"></i>
                                 <span class="link-name">Attendance</span>
-                            </a></li>
+                            </a></li>-->
                     </ul>
 
                     <ul class="logout-mode">
@@ -135,7 +138,15 @@
                                     </c:choose>
 
 
-                                    <td><img src="${lts.img}" alt="hình ảnh"/></td>
+                                    <td>
+                                        <c:if test="${lts.img == null || lts.img.isEmpty() }" >
+                                            <img src="admin/kinder/images/avtClone.jpg" style="height: 96px; width: 96px"/>
+                                        </c:if>    
+                                        <c:if test="${lts.img != null}" >
+                                            <img src="${lts.img}"/>
+                                            
+                                        </c:if>
+                                    </td>
                                     <td><a href="updatekinder?sid=${lts.kinder_id}">Update</a> </td>
                                     <td><a href="deletekinder?sid=${lts.kinder_id}">Delete</a> </td>
                                 </tr>
