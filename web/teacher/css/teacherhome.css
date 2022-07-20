@@ -6,6 +6,7 @@
 }
 
 .wrapper {
+    max-width: 1900px;
     background-color: #E9E9E9;
 }
 
@@ -14,6 +15,7 @@
     height: 100vh;
     display: flex;
     justify-content: space-between;
+
 }
 
 .left-side-menu {
@@ -57,12 +59,6 @@
 .vertical-menu .menu-item-container {
     width: 80%;
     margin: 20px auto;
-}
-
-.vertical-menu .log-out {
-    height: 55vh;
-    display: flex;
-    align-items: flex-end
 }
 
 .log-out a {
@@ -126,7 +122,9 @@
 }
 
 .page-content {
+    height: 100vh;
     padding: 0px 86px;
+    position: relative;
 }
 
 .header-intro {
@@ -208,6 +206,16 @@ input[type="search"]:hover {
     border-radius: 20px;
 }
 
+.header-filter input{
+    padding: 15px;
+    border-radius: 20px;
+    background-color: #fff;
+    border: none;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+}
+
 .class-section {
     text-align: center;
 }
@@ -272,8 +280,7 @@ input[type="search"]:hover {
 }
 
 .body-container {
-    height: 460px;
-    overflow-y: scroll;
+    height: 585px;
     margin-top: 20px;
     padding-right: 5px;
 }
@@ -322,6 +329,12 @@ input[type="search"]:hover {
     background: #dddddd;
 }
 
+.list-students-ver2{
+    overflow-y: scroll;
+    width: 100%;
+    height: 520px;
+}
+
 .list-students-ver2 .student-infor {
     display: flex;
     background-color: #fff;
@@ -359,9 +372,15 @@ form{
     border: none;
 }
 
+.header-intro .search-section form{
+    background-color: #fff;
+    border-radius: 20px;
+}
+
 .submit-btn{
     display: flex;
     justify-content: flex-end;
+    padding-top: 10px;
 }
 
 .submit-btn input{
@@ -379,5 +398,46 @@ form{
     background-color: #889BFF;
     color: #fff;
 }
+
+.overlay{
+    position: fixed;
+    justify-content: space-around;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.popup {
+    margin: 200px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 40%;
+    position: relative;
+    transition: all 5s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup .content{
+    text-align: center;
+    padding-top: 10px;
+}
+
+.warning-icon{
+    width: 10%;
+}
+
+.warning-icon i{
+    font-size: 55px;
+    color: red;
+}
+
+
 
 

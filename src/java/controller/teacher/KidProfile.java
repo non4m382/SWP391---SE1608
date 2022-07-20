@@ -4,7 +4,7 @@
  */
 package controller.teacher;
 
-import dal.StudentDAO;
+import dal.KindergartnerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,9 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.AccountRole;
+import model.Account;
 import model.Kindergartner;
-import model.Parent;
 
 /**
  *
@@ -61,16 +60,14 @@ public class KidProfile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        AccountRole acc = (AccountRole) session.getAttribute("account");
+        Account acc = (Account) session.getAttribute("account");
         String action = request.getParameter("action");
-        PrintWriter out = response.getWriter();
-        out.print(action);
         if (acc != null) {
             try {
                 int kid_id = Integer.parseInt(request.getParameter("kid_id"));
-                StudentDAO studao = new StudentDAO();
+                KindergartnerDAO studao = new KindergartnerDAO();
                 Kindergartner kc = studao.getKidInfoById(kid_id);
-                Parent p = studao.getParentById(kc.getParent_id());
+                Account p = studao.getParentById(kc.getParentAccount().getAccountID());
                 request.setAttribute("kid_info", kc);
                 request.setAttribute("parent", p);
                 request.getRequestDispatcher("teacher/kidprofile.jsp").forward(request, response);

@@ -29,7 +29,7 @@
                         <div class="menu-item-container">
                             <ul class="item-lists">
                                 <li class="menu-item">
-                                    <a href="loadteacherhome">Home</a>
+                                    <a href="attendance">Home</a>
                                 </li>
                                 <li class="menu-item">
                                     <a href="#">View schedule</a>
@@ -40,7 +40,7 @@
                             </ul>
                         </div>
                         <div class="log-out">
-                            <a href="login?action=logout">Log out</a>
+                            <a href="logout">Log out</a>
                         </div>
                     </div>
                 </div>
@@ -67,8 +67,8 @@
                                 <div class="feedback option-item">
                                     <a href="studentinfor?action=feedback&kid_id=${kid.kinder_id}">Feedback</a>
                                 </div>
-                                <div class="profile option-item">
-                                    <a href="#">Profile</a>
+                                <div class="profile option-item current1">
+                                    <a href="#" style="color: #fff;">Profile</a>
                                 </div>
                             </div>
 
@@ -84,7 +84,7 @@
                                         <strong>Parent's phone</strong>
                                     </div>
                                     <c:set var="parent" value="${requestScope.parent}"/>
-                                    <p>${parent.phone}</p>
+                                    <p>${parent.phoneNumber}</p>
                                 </div>
                                 <div class="content-item address">
                                     <div class="item-title">
@@ -103,22 +103,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </body>
-    <script>
-        window.onload = function () {
-            var patharr = location.pathname.split("/");
-            var fileName = patharr[3];
-            var options = document.getElementById('options');
-            var links = options.getElementsByTagName("a");
-            // alert(links.length);
-            for (i = 1; i < links.length; i++) {
-                if (links[i].getAttribute("href").indexOf(fileName) > -1) {
-                    links[i].parentNode.className = 'current';
-                }
-            }
-        };
-    </script>
-
 </html>

@@ -10,17 +10,25 @@ public class Class {
     private String class_name;
     private int grade;
     private String class_description;
-    private int teacher_id;
+    private Account acc;
 
     public Class() {
     }
 
-    public Class(int class_id, String class_name, int grade, String class_description, int teacher_id) {
+    public Class(int class_id, String class_name, int grade, String class_description, Account acc) {
         this.class_id = class_id;
         this.class_name = class_name;
         this.grade = grade;
         this.class_description = class_description;
-        this.teacher_id = teacher_id;
+        this.acc = acc;
+    }
+
+    public Account getAcc() {
+        return acc;
+    }
+
+    public void setAcc(Account acc) {
+        this.acc = acc;
     }
 
     public int getClass_id() {
@@ -53,19 +61,6 @@ public class Class {
 
     public void setClass_description(String class_description) {
         this.class_description = class_description;
-    }
-
-    public int getTeacher_id() {
-        return teacher_id;
-    }
-
-    public void setTeacher_id(int teacher_id) {
-        this.teacher_id = teacher_id;
-    }
-
-    @Override
-    public String toString() {
-        return "Class{" + "class_id=" + class_id + ", class_name=" + class_name + ", grade=" + grade + ", class_description=" + class_description + ", teacher_id=" + teacher_id + '}';
     }
 
 }

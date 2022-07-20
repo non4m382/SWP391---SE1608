@@ -4,6 +4,8 @@
  */
 package controller.teacher;
 
+import dal.AttendanceDAO;
+import dal.KindergartnerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,7 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.AccountRole;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import model.Account;
+import model.Attendance;
+import model.Kindergartner;
 
 /**
  *
@@ -46,6 +55,7 @@ public class StudentInforPage extends HttpServlet {
             out.println("</html>");
         }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -56,18 +66,42 @@ public class StudentInforPage extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    public List<String> getAllDateOfMonth(int month){
+        List<String> list = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MONTH, month-1);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        int maxDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        for (int i = 0; i < maxDay; i++) {
+            cal.set(Calendar.DAY_OF_MONTH, i + 1);
+            list.add(df.format(cal.getTime()));
+        }
+        return list;
+    }
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        KindergartnerDAO kinderdao = new KindergartnerDAO();
+        AttendanceDAO attdao = new AttendanceDAO();
         String action = request.getParameter("action");
         HttpSession session = request.getSession(true);
-        AccountRole acc = (AccountRole) session.getAttribute("account");
+        Account acc = (Account) session.getAttribute("account");
         int kid_id = Integer.parseInt(request.getParameter("kid_id"));
         if (acc != null) {
-            request.setAttribute("kid_id", kid_id);
+            Kindergartner kinder = kinderdao.getKidInfoById(kid_id);
+            request.setAttribute("kinder", kinder);
             if (action.equalsIgnoreCase("feedback")) {
                 request.getRequestDispatcher("teacher/feedback.jsp").forward(request, response);
             } else if (action.equalsIgnoreCase("attendance")) {
+                int month = LocalDate.now().getMonthValue();
+                List<String> listDate = getAllDateOfMonth(month);
+                List<Attendance> attendance = attdao.getAttByKidId(kid_id);
+                request.setAttribute("maxindexobject", attendance.get(attendance.size()-1));
+                request.setAttribute("listDate", listDate);
+                request.setAttribute("attendance", attendance);
                 request.getRequestDispatcher("teacher/checkAttendence.jsp").forward(request, response);
             } else if (action.equalsIgnoreCase("kidprofile")) {
                 request.getRequestDispatcher("teacher/kidprofile.jsp").forward(request, response);

@@ -42,12 +42,13 @@
                             </ul>
                         </div>
                         <div class="log-out">
-                            <a href="login?action=logout">Log out</a>
+                            <a href="logout">Log out</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="right-side">
+                    <c:set var="kinder" value="${requestScope.kinder}"/>
                     <div class="page-content">
                         <div class="kid-profile">
                             <div class="kid-profile_header">
@@ -56,25 +57,24 @@
                                 </div>
 
                                 <div class="personel-section">
-                                    <h1>Andrew</h1>
-                                    <p>01-01-1999</p>
+                                    <h1>${kinder.first_name} ${kinder.last_name}</h1>
+                                    <p>${kinder.dob}</p>
                                 </div>
                             </div>
 
                             <div class="list-option" id="options">
                                 <div class="attendence option-item">
-                                    <a href="studentinfor?action=attendance">Attendance</a>
+                                    <a href="studentinfor?action=attendance&kid_id=${kinder.kinder_id}">Attendance</a>
                                 </div>
-                                <div class="feedback option-item">
-                                    <a href="#">Feedback</a>
+                                <div class="feedback option-item current1">
+                                    <a href="#" style="color: #fff;">Feedback</a>
                                 </div>
                                 <div class="profile option-item">
-                                    <a href="kidprofile?kid_id=${requestScope.kid_id}">Profile</a>
+                                    <a href="kidprofile?kid_id=${kinder.kinder_id}">Profile</a>
                                 </div>
                             </div>
                             <form action="feedback" method="POST">
-                                <c:set var="kid_id" value="${requestScope.kid_id}"/>
-                                <input type="hidden" name="kid_id" value="${kid_id}" readonly />
+                                <input type="hidden" name="kid_id" value="${kinder.kinder_id}" readonly />
                                 <div class="feedback-content">
                                     <textarea name="fb-content" id="" cols="30" rows="10" placeholder="Type feedback..."></textarea>
                                 </div>
@@ -112,7 +112,6 @@
                                             <input type="radio" id="starhalf" name="rating" value="1.5" />
                                             <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
                                         </div>
-
                                     </div>
                                     <input type="submit" name="Save" placeholder="Save" onclick="submitId()">
                                 </div>

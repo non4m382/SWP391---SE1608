@@ -7,19 +7,19 @@ package model;
 
 public class Schedule {
     private int     schedule_id;
-    private int     class_id;
-    private int     activity_id;
-    private int     slot_id;
+    private Class classs;
+    private Activity activity;
+    private Slot slot;
     private String  schedule_date;
 
     public Schedule() {
     }
 
-    public Schedule(int schedule_id, int class_id, int activity_id, int slot_id, String schedule_date) {
+    public Schedule(int schedule_id, Class classs, Activity activity, Slot slot, String schedule_date) {
         this.schedule_id = schedule_id;
-        this.class_id = class_id;
-        this.activity_id = activity_id;
-        this.slot_id = slot_id;
+        this.classs = classs;
+        this.activity = activity;
+        this.slot = slot;
         this.schedule_date = schedule_date;
     }
 
@@ -31,28 +31,28 @@ public class Schedule {
         this.schedule_id = schedule_id;
     }
 
-    public int getClass_id() {
-        return class_id;
+    public Class getClasss() {
+        return classs;
     }
 
-    public void setClass_id(int class_id) {
-        this.class_id = class_id;
+    public void setClasss(Class classs) {
+        this.classs = classs;
     }
 
-    public int getActivity_id() {
-        return activity_id;
+    public Activity getActivity() {
+        return activity;
     }
 
-    public void setActivity_id(int activity_id) {
-        this.activity_id = activity_id;
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 
-    public int getSlot_id() {
-        return slot_id;
+    public Slot getSlot() {
+        return slot;
     }
 
-    public void setSlot_id(int slot_id) {
-        this.slot_id = slot_id;
+    public void setSlot(Slot slot) {
+        this.slot = slot;
     }
 
     public String getSchedule_date() {
@@ -63,10 +63,5 @@ public class Schedule {
         this.schedule_date = schedule_date;
     }
 
-    @Override
-    public String toString() {
-        return "Schedule{" + "schedule_id=" + schedule_id + ", class_id=" + class_id + ", activity_id=" + activity_id + ", slot_id=" + slot_id + ", schedule_date=" + schedule_date + '}';
-    }
-    
     
 }

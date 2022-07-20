@@ -1,4 +1,5 @@
 .kid-profile {
+    height: 665px;
     margin-top: 15px;
     background-color: #fff;
     border-radius: 20px;
@@ -31,7 +32,7 @@ h1 {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 25px auto;
+    margin: 50px auto;
     border-radius: 20px;
     line-height: 50px;
     box-shadow: 3px 4px 4px 4px rgb(0 0 0 / 12%);
@@ -66,7 +67,7 @@ h1 {
 .kid-profile_content {
     width: 85%;
     height: auto;
-    margin: 0 auto;
+    margin: 75px auto;
     padding-bottom: 10px;
 }
 

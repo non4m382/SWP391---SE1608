@@ -50,6 +50,30 @@ public class ActivityDAO extends DBContext {
         return activities;
     }
 
+    public Activity getAllActivityByID(int id) {
+
+        try {
+            String sql = "select * from Activity where activity_id = ?";
+            connection = new DBContext().getConnection();
+            st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            rs = st.executeQuery();
+            while (rs.next()) {
+                Activity t = new Activity();
+                t.setActivity_id(rs.getInt("activity_id"));
+                t.setAct_description(rs.getString("act_description"));
+                t.setAct_name(rs.getString("act_name"));
+                return t;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ActivityDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ActivityDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public void insertActivity(Activity activity) {
         try {
             String sql = "INSERT INTO [activity]\n"
@@ -64,9 +88,9 @@ public class ActivityDAO extends DBContext {
             st.setString(2, activity.getAct_name());
             st.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(TeacherDAO.class.getName()).log(Level.SEVERE, null, ex);
+            
         } catch (Exception ex) {
-            Logger.getLogger(TeacherDAO.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }
 
@@ -83,9 +107,9 @@ public class ActivityDAO extends DBContext {
             st.setString(2, activity.getAct_name());
             st.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(TeacherDAO.class.getName()).log(Level.SEVERE, null, ex);
+            
         } catch (Exception ex) {
-            Logger.getLogger(TeacherDAO.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }
 
@@ -103,13 +127,14 @@ public class ActivityDAO extends DBContext {
 //            Logger.getLogger(TeacherDAO.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
-
     public static void main(String[] args) {
         ActivityDAO aa = new ActivityDAO();
 //        aa.insertActivity(new Activity("thanhld", "14"));
-        aa.updateActivity(new Activity(1, "NguyenNgocAnh", "Cho con nghi hoc"));
-        
-        ArrayList<Activity> aaa = aa.getAllActivity();
-        System.out.println(aaa);
+//        aa.updateActivity(new Activity(1, "NguyenNgocAnh", "Cho con nghi hoc"));
+//
+//        ArrayList<Activity> aaa = aa.getAllActivity();
+//        System.out.println(aaa);
+        Activity a = aa.getAllActivityByID(1);
+        System.out.println(a.getAct_description());
     }
 }

@@ -7,10 +7,9 @@ package model;
 public class Kindergartner {
 
     private int kinder_id;
-    private int parent_id;
+    private Account parentAccount;
     private String first_name;
     private String last_name;
-    private int class_id;
     private String dob;
     private boolean gender;
     private String img;
@@ -18,16 +17,17 @@ public class Kindergartner {
     public Kindergartner() {
     }
 
-    public Kindergartner(int kinder_id, int parent_id, String first_name, String last_name, int class_id, String dob, boolean gender, String img) {
+    public Kindergartner(int kinder_id, Account parentAccount, String first_name, String last_name, String dob, boolean gender, String img) {
         this.kinder_id = kinder_id;
-        this.parent_id = parent_id;
+        this.parentAccount = parentAccount;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.class_id = class_id;
         this.dob = dob;
         this.gender = gender;
         this.img = img;
     }
+    
+    
 
     public int getKinder_id() {
         return kinder_id;
@@ -37,16 +37,12 @@ public class Kindergartner {
         this.kinder_id = kinder_id;
     }
 
-    public int getParent_id() {
-        return parent_id;
+    public Account getParentAccount() {
+        return parentAccount;
     }
 
-    public void setParent_id(int parent_id) {
-        this.parent_id = parent_id;
-    }
-
-    public String getFullName() {
-        return first_name + " " + last_name;
+    public void setParentAccount(Account parentAccount) {
+        this.parentAccount = parentAccount;
     }
 
     public String getFirst_name() {
@@ -64,13 +60,9 @@ public class Kindergartner {
     public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
-
-    public int getClassID() {
-        return class_id;
-    }
-
-    public void setClassID(int class_id) {
-        this.class_id = class_id;
+    
+    public String getFullName() {
+        return first_name + " " + last_name;
     }
 
     public String getDob() {
@@ -99,7 +91,7 @@ public class Kindergartner {
 
     @Override
     public String toString() {
-        return "Kindergarden{" + "kinder_id=" + kinder_id + ", parent_id=" + parent_id + ", first_name=" + first_name + ", last_name=" + last_name + ", class_id=" + class_id + ", dob=" + dob + ", gender=" + gender + ", img=" + img + '}';
+        return "Kindergartner{" + "kinder_id=" + kinder_id + ", parentAccount=" + parentAccount + ", first_name=" + first_name + ", last_name=" + last_name + ", dob=" + dob + ", gender=" + gender + ", img=" + img + '}';
     }
 
 }

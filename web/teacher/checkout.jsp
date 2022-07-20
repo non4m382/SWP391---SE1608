@@ -18,149 +18,194 @@
         <script src="https://kit.fontawesome.com/67b5c45612.js" crossorigin="anonymous"></script>
         <script src="teacher/js/teacherhome.js"></script>
 
+        <style>
+            .current1>a{
+                color: #fff;
+            }
+
+
+        </style>
     </head>
 
     <body>
+        <c:set var="acc" value="${sessionScope.account}"/>
+        <c:set var="kinderClass" value="${sessionScope.kinder_class}"/>
         <div class="wrapper">
             <div class="home">
                 <div class="left-side-menu">
                     <div class="vertical-menu">
                         <div class="user-welcome">
                             <img class="user-img" src="teacher/img/userImg/dummy-user-img.png" style="width: 80px; height: 80px;" alt="">
-                            <p>Harry Porter</p>
+                            <p>${acc.firstName} ${acc.lastName}</p>
                         </div>
                         <div class="menu-item-container">
                             <ul class="item-lists">
-                                <li class="menu-item current">
-                                    <a href="loadteacherhome">Home</a>
+                                <li class="menu-item current1">
+                                    <a href="attendance" style="color: #fff;">Home</a>
                                 </li>
-                                <li class="menu-item">
-                                    <a href="#">View schedule</a>
-                                </li>
+<!--                                <li class="menu-item">
+                                    <a href="schedule.html">View schedule</a>
+                                </li>-->
                             </ul>
                         </div>
                         <div class="log-out">
-                            <a href="login?action=logout">Log out</a>
+                            <a href="logout">Log out</a>
                         </div>
                     </div>
                 </div>
+
                 <div class="right-side">
                     <div class="page-content">
                         <div class="header-container">
                             <div class="header-intro">
                                 <div class="class-section">
-                                    <h1>SE1608</h1>
+                                    <h1>${kinderClass.class_name}</h1>
                                 </div>
                                 <div class="search-section">
-                                    <form>
-                                        <input type="search" placeholder="Search...">
+                                    <form action="filter" method="get">
+                                        <input type="search" name="searchbar" placeholder="Search...">
+                                        <input type="hidden" name="action" value="checkout"/>
                                         <button type="submit">Search</button>
                                     </form>
                                 </div>
                             </div>
                             <div class="header-filter">
+                                <div class="date-input">
+                                    <form id="myform" action="checkattendance" method="POST">
+                                        <input id="dateinput" type="date" name="checkindate" value="${requestScope.checkindate}"/>
+                                        <input type="hidden" name="action" value="checkout"/>
+                                        <input type = "submit" value="Submit" onclick="onSubmitClick()" hidden/>
+                                    </form>
+                                </div>
                                 <div class="left-modes">
                                     <div class="check-section">
                                         <div class="check-in check-item ">
-                                            <a href="attendance">Check in</a>
+                                            <a href="attendance" >Check in</a>
                                         </div>
                                         <div class="check-out check-item current1">
-                                            <a href="#">Check out</a>
+                                            <a href="#" style="color: #fff;">Check out</a>
                                         </div>
                                     </div>
-                                    <div class="student-filter">
-                                        <div class="filter-item">
-                                            <a href="">All</a>
+<!--                                    <div class="student-filter">
+                                        <div class="filter-item ${!requestScope.filter.equals("absent")?"current1":""}">
+                                            <a href="checkattendance?action=checkin&filteritem=getall&checkindate=${checkindate}" style="color: ${!requestScope.filter.equals("absent")?"#fff":""};">All</a>
                                         </div>
-                                        <div class="filter-item">
-                                            <a href="#">Absent only</a>
+                                        <div class="filter-item ${requestScope.filter.equals("absent")?"current1":""}">
+                                            <a href="checkattendance?action=checkin&filteritem=absent&checkindate=${checkindate}" style="color: ${requestScope.filter.equals("absent")?"#fff":""};">Absent only</a>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="mode-menu right-mode">
-                                    <a href="loadteacherhome" class="window-mode mode-item">
-                                        <img src="teacher/img/icon/372745201553239377-128.png" style="width: 33px; height: 35px; line-height: 32px;" alt="">
-                                    </a>
-                                    <a href="#" class="list-mode mode-item current1" style="text-decoration: none;">
-                                        <i class="fa-solid fa-bars" style="font-size: 25px; line-height: 35px;"></i>
-                                    </a>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
+                        <c:set var="map" value="${requestScope.studentMap}"/>
+                        <c:set var="listKinder" value="${requestScope.listKinder}"/>
+                        <c:set var="presentKids" value="${requestScope.present_kids}"/>
+                        <c:set var="attendanceStr" value="${requestScope.attendanceStr}"/>
+                        <c:set var="isPast" value="${requestScope.isPast}"/>
                         <div class="body-container">
-                            <c:if test="${sessionScope.checkoutkids == null}">
-                                <form action="checkout" method="POST">
-                                    <div class="list-students-ver2">
-                                        <%
+                            <form action="checkout" method="post"> 
+                                <div class="list-students-ver2">
+                                    <%
                                         int count = 0;
-                                        %>
-                                        <c:forEach var="s" items="${requestScope.liststu}">
-                                            <input type="hidden" name="action" value="check_in"/>
-                                            <div class="student-infor">
-                                                <%
-                                                    count++;
-                                                %>
-                                                <p><%= count%></p>
-                                                <div class="img-section">
-                                                    <img src="teacher/img/userImg/download.png" alt="">
-                                                </div>
-                                                <a href="kidprofile?kid_id=${s.kinder_id}">${s.first_name} ${s.last_name}</a>
-                                                <c:if test="${sessionScope.checkoutkids == null}">
-                                                    <div class="check-attendance">
-                                                        <input type="radio" name="checkAttendence${s.kinder_id}" value="1"  placeholder="Attend"> Attend
-                                                        <input type="radio" name="checkAttendence${s.kinder_id}" value="0" checked placeholder="Absent"> Absent
-                                                    </div>
-                                                </c:if>
+                                        
+                                    %>
+                                    <c:forEach var="s" items="${listKinder}">
+                                        <div class="student-infor">
+                                            <%
+                                                count++;
+                                            %>
+                                            <p><%=count%></p>
+                                            <div class="img-section">
+                                                <img src="teacher/img/userImg/download.png" alt="">
                                             </div>
-                                        </c:forEach>
-                                        <div class="submit-btn">
-                                            <input type="submit" name="Save" value="Save"/>
-                                        </div>
-                                    </div>
-                                </form>
-                            </c:if>
-
-                            <c:if test="${sessionScope.checkoutkids !=null}">
-                                <form action="checkout" method="POST">
-                                    <div class="list-students-ver2">
-                                        <%
-                                        int count = 0;
-                                        %>
-                                        <c:forEach var="s" items="${requestScope.liststu}">
-                                            <input type="hidden" name="action" value="check_in"/>
-                                            <div class="student-infor">
-                                                <%
-                                                    count++;
-                                                %>
-                                                <p><%= count%></p>
-                                                <div class="img-section">
-                                                    <img src="teacher/img/userImg/download.png" alt="">
+                                            <a href="kidprofile?kid_id=${s.kinder.kinder_id}">${s.kinder.first_name} ${s.kinder.last_name}</a>
+                                            <c:if test="${presentKids == null}">
+                                                <div class="check-attendance">
+                                                    <input type="radio" name="<%=count%>" id="<%=count%>" onclick="saveAttendance(<%=count%>)" value="1" 
+                                                           placeholder="Attend"> Check out
+                                                    <input type="radio" name="<%=count%>" id="<%=count%>" onclick="saveAttendance(<%=count%>)" value="0" 
+                                                           checked placeholder="Absent"> Check in
                                                 </div>
-                                                <a href="kidprofile?kid_id=${s.kinder_id}">${s.first_name} ${s.last_name}</a>
-                                                <c:forEach var="ps" items="${sessionScope.checkoutkids}">
-                                                    <c:if test="${s.kinder_id == ps.student_id}">
-                                                        <div class="check-attendance">
-                                                            <c:set value="${ps.status}" var="status"/>
-                                                            <input type="radio" name="checkAttendence${s.kinder_id}" value="1" 
-                                                                   ${status==2?"checked":""}/> Attend
-                                                            <input type="radio" name="checkAttendence${s.kinder_id}" value="0" 
-                                                                   ${status==1?"checked":""}/> Absent
-                                                        </div>
+                                            </c:if>
+                                            <c:if test="${presentKids != null}">
+                                                <c:forEach items="${map}" var="ps">
+                                                    <c:if test="${isPast == false}">
+                                                        <c:if test="${ps.key == s.kinder.kinder_id}">
+                                                            <div class="check-attendance">
+                                                                <c:set var="k1" value="${ps.key}:2"/>
+                                                                <c:set var="k2" value="${ps.key}:1"/>
+                                                                <input type="radio" name="<%=count%>" id="${k1}" onclick="saveAttendance('${k1}')" value="1" 
+                                                                       ${ps.value==2?"checked":""} /> Check out
+                                                                <input type="radio" name="<%=count%>" id="${k2}" onclick="saveAttendance('${k2}')" value="0" 
+                                                                       ${ps.value==1?"checked":""} /> Check in
+                                                            </div>
+                                                        </c:if>
                                                     </c:if>
+                                                    <c:if test="${isPast == true}">
+                                                        <c:if test="${ps.key == s.kinder.kinder_id}">
+                                                            <div class="check-attendance">
+                                                                <c:set var="k1" value="${ps.key}:2"/>
+                                                                <c:set var="k2" value="${ps.key}:1"/>
+                                                                <input type="radio" name="<%=count%>" id="${k1}" onclick="saveAttendance('${k1}')" value="1" 
+                                                                       ${ps.value==2?"checked":""} disabled="true"/> Check out
+                                                                <input type="radio" name="<%=count%>" id="${k2}" onclick="saveAttendance('${k2}')" value="0" 
+                                                                       ${ps.value==1?"checked":""} disabled="true"/> Check in
+                                                            </div>
+                                                        </c:if>
+                                                    </c:if>
+
                                                 </c:forEach>
-                                            </div>
-                                        </c:forEach>
-                                        <div class="submit-btn">
-                                            <input type="submit" name="Save" value="Save"/>
+                                            </c:if>
                                         </div>
+                                    </c:forEach>
+                                    <input type="hidden" name="attendanceStatus" id="attendanceStatus"/>
+                                    <div class="submit-btn">
+                                        <input type="submit" name="Save" value="Save"/>
                                     </div>
-                                </form>
-                            </c:if>
+                                </div>
+                            </form>
                         </div>
+                        <c:if test="${requestScope.message !=null}">
+                            <div class="popup" id="xspopup">
+                                <div class="popup-content">
+                                    <div class="close" id="close-btn">
+                                        <i class="fa-solid fa-xmark" onclick="closeBox()"></i>
+                                    </div>
+                                    <div class="message">
+                                        <h3 style="color: red;">${requestScope.message}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
         </div>
     </body>
+    <script>
+//        setTimeout(hideNotification, 8000);
+        document.getElementById('dateinput').onchange = function () {
+            document.getElementById("myform").submit();
+        };
 
+//        document.getElementById('close-btn').onclick = function () {
+//            document.getElementById('xspopup').style.display = "none";
+//        };
+
+        var stumap = new Map();
+        var a1 = '${requestScope.studentMap}'.slice(1, -1).split(", ");
+        for (var i = 0; i < a1.length; i++) {
+            stumap.set(a1[i].substring(0, a1[i].indexOf('=')), a1[i].substring(a1[i].indexOf('=') + 1, a1[i].length));
+        }
+        function saveAttendance(index) {
+            var ans = index.split(':');
+            stumap.set(ans[0], ans[1]);
+            var output = "";
+            for (const [key, value] of stumap) {
+                output += key + ":" + value + ",";
+            }
+            document.getElementById("attendanceStatus").value = output;
+        }
+
+    </script>
 </html>
