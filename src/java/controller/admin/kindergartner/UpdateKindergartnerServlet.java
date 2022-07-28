@@ -66,21 +66,21 @@ public class UpdateKindergartnerServlet extends HttpServlet {
         Boolean gender = request.getParameter("flexRadioDefault").equals("male");
         String image = request.getParameter("txtImg");
 
-        PrintWriter out = response.getWriter();
-        out.println(kid);
-        out.println(fname);
-        out.println(lname);
-        out.println(dob);
-        out.println(pid);
-        out.println(gender);
-        out.println(image);
+//        PrintWriter out = response.getWriter();
+//        out.println(kid);
+//        out.println(fname);
+//        out.println(lname);
+//        out.println(dob);
+//        out.println(pid);
+//        out.println(gender);
+//        out.println(image);
 //        out.println(kid);
 
         Kindergartner k = new Kindergartner();
         int accountId = Integer.parseInt(pid);
         Account a = ad.getAccountByID(accountId);
 
-        out.println(a);
+//        out.println(a);
 
         k.setFirst_name(fname);
         k.setLast_name(lname);

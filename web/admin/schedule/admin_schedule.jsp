@@ -170,7 +170,7 @@
                                                 <input name="cid_raw" value="${cid_raw}" type="hidden"/>
                                                 <!--<input name="cid_raw" value="${cid_raw}" type="hidden"/>-->
                                                 <input name="slot_chosen" value="${loop.index + 1}" type="hidden"/>
-                                                <select name="select_activity" style="max-width: 100px">
+                                                <select name="select_activity" style="max-width: 100%; margin-bottom: 4px;">
                                                     <c:forEach items="${requestScope.activity}" var="act">
                                                         <option value="${act.activity_id}"
                                                                 <c:if test="${map.value[loop.index].activity.activity_id eq act.activity_id}">selected</c:if>>

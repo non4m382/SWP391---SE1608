@@ -55,10 +55,10 @@
                                 <i class="uil uil-comments"></i>
                                 <span class="link-name">Schedule</span>
                             </a></li>
-                        <li><a href="#">
+<!--                        <li><a href="#">
                                 <i class="uil uil-share"></i>
                                 <span class="link-name">Attendance</span>
-                            </a></li>
+                            </a></li>-->
                     </ul>
 
                     <ul class="logout-mode">

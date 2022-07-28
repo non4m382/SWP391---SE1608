@@ -198,5 +198,27 @@ public class AttendanceDAO {
             System.out.println(list);
         }
     }
+    
+    public List<Attendance> getKidAttendance(int id){
+        String sql = "select * from attendance where student_id = ?";
+        List<Attendance> list = new ArrayList<>();
+        try {
+            connection = new DBContext().getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Attendance(kinderdao.getKidInfoById(id),
+                        new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(2)),
+                        rs.getInt(3),
+                        accdao.getAccountByID(rs.getInt(4)))
+                );
+            }
+            return list;
+        } catch (Exception ex) {
+            Logger.getLogger(AttendanceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }

@@ -60,4 +60,22 @@ public class StudyRecordDAO {
             Logger.getLogger(KindergartnerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public model.Class getKidClass(int id){
+        
+        String sql = "select * from Class Inner join Study_Record on Class.class_id = Study_Record.class_id where kinder_id = ?";
+        try {
+            connection = new DBContext().getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                model.Class cl = new model.Class(rs.getInt(1),cd.getClassByID(rs.getInt(1)).getClass_name(),rs.getInt(3),rs.getString(4),ad.getAccountByID(rs.getInt(5)));
+                return cl;
+            }
+           
+        } catch (Exception ex) {
+            Logger.getLogger(KindergartnerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

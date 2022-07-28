@@ -276,7 +276,7 @@ body.dark .switch:before{
 .dash-bottomtable{
     display: flex;
     overflow: auto;
-    height: 500px;
+    height: 72vh;
 }
 
 

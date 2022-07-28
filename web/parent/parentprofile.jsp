@@ -7,8 +7,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="./assets/image/logo2-removebg-preview.png">
-        <title>ATKD ChildCare</title>
+        <link rel="icon" href="/ATKD_Project/homepage/assets/image/logo2-removebg-preview.png">
+        <title>ATKD ChildCare - Parent Profile</title>
         <link rel="stylesheet" href="/ATKD_Project/homepage/parent/css/parenthome.css">
         <link rel="stylesheet" href="/ATKD_Project/homepage/parent/css/childprofile.css">
         <link rel="stylesheet" href="/ATKD_Project/homepage/parent/css/childregister.css">
@@ -129,13 +129,13 @@
                                     
                                     
                                 </div>
-                                <div class="content-item address">
+<!--                                <div class="content-item address">
                                     <div class="item-title">
                                         <strong>Profile Picture</strong>
                                     </div>
                                     <p class="parent-infor">${account.img}</p>
                                     
-                                </div>
+                                </div>-->
                                 <div class="mb-6" style="margin-top: 30px; margin-bottom: 30px; padding-left: 300px ">
                                     <a href="/ATKD_Project/homepage/parent/parentupdateprofile.jsp">
                                         <input type="submit" class="button" value="Update profile"/>

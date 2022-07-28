@@ -92,9 +92,9 @@
                                 </div>-->
                 <div class="sl-id" style="display: flex;">
 
-                    <div>
+<!--                    <div>
                         <button  type="submit" style="width: 40%;margin-left: 70px;margin-top: 20px;"><a href="addkinder">Add</a> </button> 
-                    </div>
+                    </div>-->
 
                 </div>
                 <div class="dash-bottomtable">
@@ -143,7 +143,7 @@
                                             <img src="admin/kinder/images/avtClone.jpg" style="height: 96px; width: 96px"/>
                                         </c:if>    
                                         <c:if test="${lts.img != null}" >
-                                            <img src="${lts.img}"/>
+                                            <img src="${lts.img}" style="height: 96px; width: 96px"/>
                                             
                                         </c:if>
                                     </td>

@@ -31,18 +31,10 @@ public class AccountDAO extends DBContext {
     public ArrayList<Account> getAccountByAcId2() {
         ArrayList<Account> accounts = new ArrayList<>();
         try {
-            String sql = "SELECT [account_id]\n"
-                    + "      ,[first_name]\n"
-                    + "      ,[last_name]\n"
-                    + "      ,[gender]\n"
-                    + "      ,[email]\n"
-                    + "      ,[password]\n"
-                    + "      ,[dob]\n"
-                    + "      ,[phone_number]\n"
-                    + "      ,[address]\n"
-                    + "      ,[img]\n"
-                    + "      ,[role_id]\n"
-                    + "  FROM [Account] where [role_id]=2";
+            String sql = "select * from Account \n"
+                    + "where account_id not in \n"
+                    + "		(select teacher_id from Class) \n"
+                    + "		and role_id = (select role_id from Role where role_name = 'teacher')";
             connection = new DBContext().getConnection();
             ps = connection.prepareStatement(sql);
 
@@ -168,7 +160,7 @@ public class AccountDAO extends DBContext {
         RoleDAO rd = new RoleDAO();
         List<Account> list = new ArrayList<>();
         try {
-            String sql = "select * from Account where role_id = 3";
+            String sql = "select * from Account where role_id = 2";
             connection = new DBContext().getConnection();
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -348,7 +340,7 @@ public class AccountDAO extends DBContext {
             ps.setString(7, a.getPhoneNumber());
             ps.setString(8, a.getAddress());
             ps.setString(9, a.getImg());
-            ps.setInt(10, 2);
+            ps.setInt(10, a.getRole().getRoleID());
             ps.executeUpdate();
         } catch (Exception ex) {
             System.err.println(ex);
@@ -473,7 +465,7 @@ public class AccountDAO extends DBContext {
         }
         return null;
     }
-    
+
     public void updateParent(Account parent) {
         List<Account> list = new ArrayList<>();
         try {
@@ -491,23 +483,24 @@ public class AccountDAO extends DBContext {
                     + " WHERE [account_id]=?";
             connection = new DBContext().getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setString(1,parent.getFirstName());
-            ps.setString(2,parent.getLastName());
-            ps.setBoolean(3,parent.isGender());
-            ps.setString(4,parent.getEmail());
-            ps.setString(5,parent.getPassword());
-            ps.setString(6,parent.getDob());
-            ps.setString(7,parent.getPhoneNumber());
-            ps.setString(8,parent.getAddress());
-            ps.setString(9,parent.getImg());
-            ps.setInt(10,parent.getRole().getRoleID());
-            ps.setInt(11,parent.getAccountID());
-            ps.executeUpdate();    
+            ps.setString(1, parent.getFirstName());
+            ps.setString(2, parent.getLastName());
+            ps.setBoolean(3, parent.isGender());
+            ps.setString(4, parent.getEmail());
+            ps.setString(5, parent.getPassword());
+            ps.setString(6, parent.getDob());
+            ps.setString(7, parent.getPhoneNumber());
+            ps.setString(8, parent.getAddress());
+            ps.setString(9, parent.getImg());
+            ps.setInt(10, parent.getRole().getRoleID());
+            ps.setInt(11, parent.getAccountID());
+            ps.executeUpdate();
         } catch (Exception e) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
     }
+
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
 

@@ -56,10 +56,10 @@
                                 <i class="uil uil-comments"></i>
                                 <span class="link-name">Schedule</span>
                             </a></li>
-                        <li><a href="#">
-                                <i class="uil uil-share"></i>
-                                <span class="link-name">Attendance</span>
-                            </a></li>
+                        <!--                        <li><a href="#">
+                                                        <i class="uil uil-share"></i>
+                                                        <span class="link-name">Attendance</span>
+                                                    </a></li>-->
                     </ul>
 
                     <ul class="logout-mode">
@@ -128,29 +128,32 @@
                         <label for="exampleFormControlInput1" class="form-label">Number Phone</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" name="txtPhone" value="${s.phoneNumber}" placeholder="name@example.com">
                     </div>
-                    <!--                    <div class="mb-3">
-                                            <label for="exampleFormControlTextarea1" class="form-label">Address</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" name="ttAddress"   rows="3"></textarea>
-                                        </div>-->
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" name="ttAddress" value="${s.address}" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="ttAddress" value="${s.address}" placeholder="HN, Vietnam">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Image</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" name="txtImg" value="${s.img}">
                     </div>
-                    <select class="form-select" name="slRole" aria-label="Default select example">
-                        <!--<option value="0" selected>All</option>-->
-                        <c:forEach items="${requestScope.listR}" var="role">
-                            <option 
-                                <c:if test="${role.roleID eq s.role.roleID}">selected=""</c:if>
-                                 
-                                value="${role.roleID}">${role.roleName}</option>
-                        </c:forEach>
-                    </select>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Role</label>
+                        <input value="${s.role.roleID}" name="slRole" type="hidden"/>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="role" value="${s.role.roleName}" readonly="">
+<!--                        <select class="form-select" name="slRole" aria-label="Default select example">
+                            <option value="0" selected>All</option>
+                            
+                            <c:forEach items="${requestScope.listR}" var="role">
+                                <option 
+                                    <c:if test="${role.roleID eq s.role.roleID}">selected=""</c:if>
 
-                    </select>
+                                        value="${role.roleID}">${role.roleName}</option>
+                            </c:forEach>
+                        </select>-->
+                    </div>
+
+
+
                     <div class="d-grid gap-2 d-md-block" style="margin-top: 30px; margin-bottom: 30px; ;">
                         <input type="submit" value="Save"/>
                     </div>

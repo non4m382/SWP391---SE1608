@@ -49,7 +49,7 @@
                                 <i class="uil uil-estate"></i>
                                 <span class="link-name">Account</span>
                             </a></li>
-                        
+
                         <li><a href="listkinder">
                                 <i class="uil uil-chart"></i>
                                 <span class="link-name">Kindergartner</span>
@@ -62,10 +62,10 @@
                                 <i class="uil uil-comments"></i>
                                 <span class="link-name">Schedule</span>
                             </a></li>
-                        <li><a href="#">
+<!--                        <li><a href="#">
                                 <i class="uil uil-share"></i>
                                 <span class="link-name">Attendance</span>
-                            </a></li>
+                            </a></li>-->
                     </ul>
 
                     <ul class="logout-mode">
@@ -91,11 +91,13 @@
                     <input type="text" value="${k.kinder_id}" name="kid" hidden=""/>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">ParentName</label>
-                        <select class="form-select" name="txtPrId" aria-label="Default select example">
-                         <c:forEach items="${requestScope.listK}" var="ltnameac">                 
-                                            <option  value="${ltnameac.parentAccount.accountID}">${ltnameac.parentAccount.lastName}</option>   
-                    </c:forEach>
-                                            </select> 
+                        <input value="${k.parentAccount.accountID}" name="txtPrId" type="hidden"/>
+                        <input value="${k.parentAccount.firstName} ${k.parentAccount.lastName}" type="text" readonly="">
+                        <!--<select class="form-select" name="txtPrId" aria-label="Default select example" >-->
+                        <%--<c:forEach items="${requestScope.listK}" var="ltnameac">--%>                 
+                                           <!--<option  value="${ltnameac.parentAccount.accountID}">${ltnameac.parentAccount.lastName}</option>-->   
+                        <%--</c:forEach>--%>
+                        <!--</select>--> 
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">FirstName</label>
@@ -113,8 +115,8 @@
                         <div class="form-check">
                             <input class="form-check-input" type="radio"
                                    <c:if test="${requestScope.kinder.gender}">
-                                    selected
-                                </c:if>
+                                       selected
+                                   </c:if>
                                    value="male" name="flexRadioDefault" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Male
@@ -122,9 +124,9 @@
                         </div>
                         <div class="form-check" style="padding-left: 40px">
                             <input class="form-check-input" type="radio" 
-                                    <c:if test="${!requestScope.kinder.gender}">
-                                    selected
-                                </c:if>
+                                   <c:if test="${!requestScope.kinder.gender}">
+                                       selected
+                                   </c:if>
                                    value="female" name="flexRadioDefault" id="flexRadioDefault2" checked>
                             <label class="form-check-label" for="flexRadioDefault2">
                                 FeMale
@@ -139,7 +141,7 @@
 
                     <div class="d-grid gap-2 d-md-block" style="margin-top: 30px; margin-bottom: 30px; ;">
                         <input type="submit" value="Save"/>
-                        
+
                     </div>
                 </div>
 

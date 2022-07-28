@@ -32,7 +32,7 @@
 //});
 
 function doDelete(id) {
-    if (confirm("Are you sure to delete schedule id " + id + "?")) {
+    if (confirm("Are you sure to delete this schedule id?")) {
         window.location = "deleteschedule?sid=" + id;
     }
 }

@@ -4,7 +4,7 @@
  */
 package controller.parent;
 
-import dal.AccountDAO;
+
 import dal.AttendanceDAO;
 import dal.ClassDAO;
 import dal.KindergartnerDAO;
@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
-import static java.util.Collections.list;
+
 import java.util.List;
 import model.Account;
 import model.Attendance;
@@ -71,7 +71,6 @@ public class ChildDetailServlet extends HttpServlet {
             throws ServletException, IOException {
             HttpSession session = request.getSession(true);
             Account acc = (Account) session.getAttribute("account");
-           
             String mainchildid = request.getParameter("mainchildid");
             try ( PrintWriter out = response.getWriter()) {
                 if (acc != null) {
@@ -85,7 +84,10 @@ public class ChildDetailServlet extends HttpServlet {
                 request.getRequestDispatcher("parent/childdetails.jsp").forward(request, response);
             }
                     int mcid = 0;
-
+                    int count = 0;
+                    List<Class> availclass = new ArrayList();
+                    List<StudyRecord> srlist = srdao.getAllStudyRecord();
+                    List<Class> clist = cdao.getAllClass();
                     if(mainchildid == null){
                         Kindergartner firstchild = list.get(0);
                         session.setAttribute("mainchild",firstchild);
@@ -95,32 +97,30 @@ public class ChildDetailServlet extends HttpServlet {
                             if(kid.getKinder_id()== Integer.parseInt(mainchildid)){
                                 session.setAttribute("mainchild",kid);
                                 mcid = Integer.parseInt(mainchildid);
+                                break;
                             }
                         }
                     }
-                    List<StudyRecord> srlist = srdao.getAllStudyRecord();
-                    List<Class> clist = cdao.getAllClass();
-                    for(StudyRecord sr : srlist){
-                        if(sr.getKinder().getKinder_id()== mcid){
-                            for(Class kc : clist){
-                                if(sr.getClassID().getClass_id() == kc.getClass_id()){
-                                    session.setAttribute("kinder_class",kc);
-                                }
+                    Class kc = srdao.getKidClass(mcid);
+                    if(kc!=null){
+                        session.setAttribute("kinder_class",kc);
+                    }
+                    for(Class kcs : clist){
+                        for(StudyRecord sr : srlist){
+                            if(kcs.getClass_id() == sr.getClassID().getClass_id()){
+                                count++;
                             }
                         }
-                            
-                    }
-                    List<Attendance> alist = adao.getAllAttendanceOfDay();
-                    List<Attendance> childalist = new ArrayList();
-                    for(Attendance al : alist){
-                        if(al.getKinder().getKinder_id() == mcid){
-                            childalist.add(al);
+                        if(count<30){
+                            availclass.add(kcs);
                         }
+                        count = 0;
                     }
-                    Collections.reverse(childalist);
-                    session.setAttribute("childalist",childalist);
+                    List<Attendance> alist = adao.getKidAttendance(mcid);
+                    Collections.reverse(alist);
+                    session.setAttribute("childalist",alist);
                     session.setAttribute("kidlist",list);
-                    session.setAttribute("classlist",clist);
+                    session.setAttribute("classlist",availclass);
                     request.getRequestDispatcher("parent/childdetails.jsp").forward(request, response);
                 } else {
                 request.setAttribute("error", "Do you want to create an account?");

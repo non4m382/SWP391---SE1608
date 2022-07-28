@@ -7,8 +7,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="./assets/image/logo2-removebg-preview.png">
-        <title>ATKD ChildCare</title>
+        <link rel="icon" href="/ATKD_Project/homepage/assets/image/logo2-removebg-preview.png">
+        <title>ATKD ChildCare - Child Profile</title>
         <link rel="stylesheet" href="/ATKD_Project/homepage/parent/css/parenthome.css">
         <link rel="stylesheet" href="/ATKD_Project/homepage/parent/css/childprofile.css">
     </head>
@@ -74,10 +74,10 @@
 
                             <div class="list-option" id="options">
                                 <div class="attendence option-item">
-                                    <a href="childdetailcontrol?action=attendance&mainchildid=${mainchild.getKinder_id()}">Attendance</a>
+                                    <a href="/ATKD_Project/homepage/childdetailcontrol?action=attendance&mainchildid=${mainchild.getKinder_id()}">Attendance</a>
                                 </div>
                               <div class="profile option-item current">
-                                    <a href="childdetailcontrol?action=childprofile&mainchildid=${mainchild.getKinder_id()}">Profile</a>
+                                    <a href="/ATKD_Project/homepage/childdetailcontrol?action=childprofile&mainchildid=${mainchild.getKinder_id()}">Profile</a>
                                 </div>
                             </div>
 
@@ -87,6 +87,17 @@
                                         <strong>Date of birth</strong>
                                     </div>
                                     <p>${mainchild.dob}</p>
+                                </div>
+                                <div class="content-item description">
+                                    <div class="item-title">
+                                        <strong>Gender</strong>
+                                    </div>
+                                    <c:if test="${mainchild.gender == true }">
+                                        <p class="child-gender">Male</p>
+                                    </c:if>
+                                    <c:if test="${mainchild.gender == false }">
+                                        <p class="child-gender">Female</p>
+                                    </c:if> 
                                 </div>
                                 <div class="class content-item">
                                     <div class="item-title">
@@ -109,11 +120,16 @@
                                 </div>
                                 <div class="content-item description">
                                     <div class="item-title">
-                                        <strong>Description</strong>
+                                        <strong>Parent</strong>
                                     </div>
-                                    <p>Tiny scopulate hairs on his hands and feet that allow him to adhere to walls and most surfaces.</p>
+                                    <p>${sessionScope.account.firstName} ${sessionScope.account.lastName}</p>
                                 </div>
                             </div>
+                                <div class="mb-6">
+                                    <a href="/ATKD_Project/homepage/parent/childupdateprofile.jsp">
+                                        <input type="submit" class="child-update" value="Update profile"/>
+                                    </a>
+                                </div>    
                         </div>
                     </div>
                 </div>

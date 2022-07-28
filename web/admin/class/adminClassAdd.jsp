@@ -56,10 +56,10 @@
                                 <i class="uil uil-comments"></i>
                                 <span class="link-name">Schedule</span>
                             </a></li>
-                        <li><a href="#">
+<!--                        <li><a href="#">
                                 <i class="uil uil-share"></i>
                                 <span class="link-name">Attendance</span>
-                            </a></li>
+                            </a></li>-->
                     </ul>
 
                     <ul class="logout-mode">
@@ -89,29 +89,42 @@
                         <label for="exampleFormControlInput1" class="form-label">Grade</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" name="txtGrade">
                     </div>
-                    
 
-                    
+
+
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Description class</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" name="taDesClass" rows="3"></textarea>
                     </div>
-                    
+
                     <label for="exampleFormControlInput1" class="form-label">TeacherName</label>
+                    <!--                    <select class="form-select" name="slRole" aria-label="Default select example">
+                    <%--<c:forEach items="${requestScope.listAc}" var="listAc">--%>
+                    <%--<c:if test="${listAC.role.roleName == 'teacher'}">--%>
+   
+                    <%--</c:if>--%>
+                    <%--</c:forEach>--%>
+                </select>-->
+
                     <select class="form-select" name="slRole" aria-label="Default select example">
                         <c:forEach items="${requestScope.listAc}" var="listAc">
-                            <option selected="" value="${listAc.accountID}">${listAc.lastName}</option>
+                            <%--<c:forEach items="${requestScope.listC}" var="listC">--%>
+                                <%--<c:if test="${listAc.role.roleName == 'teacher' && listAc.accountID != listC.acc.accountID}">--%>
+                                    <option selected="" value="${listAc.accountID}">${listAc.lastName} ${listAc.firstName}</option>
+                                <%--</c:if>--%>
+                            <%--</c:forEach>--%>
+
                         </c:forEach>
-                        
                     </select>
+
                     <div class="d-grid gap-2 d-md-block" style="margin-top: 30px; margin-bottom: 30px; ;">
                         <input onclick="send()" type="submit" value="Save"/>  
                     </div>
                 </div>
             </div>
-        
-    </form>
-    <!-- <script src="agu.js"></script> -->
-</body>
+
+        </form>
+        <!-- <script src="agu.js"></script> -->
+    </body>
 
 </html>

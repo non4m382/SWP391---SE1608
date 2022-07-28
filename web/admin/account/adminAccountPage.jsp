@@ -104,9 +104,9 @@
                         </select>
 
                     </div>
-                    <!--                    <div>
-                                            <button  type="submit" style="width: 40%;margin-left: 70px;margin-top: 20px;"><a href="addaccount" style="text-decoration: none">Add</a> </button> 
-                                        </div>-->
+                    <div>
+                        <button  type="submit" style="width: 40%;margin-left: 70px;margin-top: 20px;"><a href="addaccount" style="text-decoration: none">Add</a> </button> 
+                    </div>
                 </div>
 
 
@@ -156,7 +156,7 @@
                                             <img src="admin/account/images/avtClone.jpg" style="height: 96px; width: 96px"/>
                                         </c:if>    
                                         <c:if test="${t.img != null}" >
-                                            <img src="${t.img}"/>
+                                            <img src="${t.img}" style="height: 96px; width: 96px"/>
                                             
                                         </c:if>
                                     </td>

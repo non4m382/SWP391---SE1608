@@ -56,10 +56,10 @@
                                 <i class="uil uil-comments"></i>
                                 <span class="link-name">Schedule</span>
                             </a></li>
-                        <li><a href="#">
+<!--                        <li><a href="#">
                                 <i class="uil uil-share"></i>
                                 <span class="link-name">Attendance</span>
-                            </a></li>
+                            </a></li>-->
                     </ul>
 
                     <ul class="logout-mode">
@@ -83,11 +83,11 @@
                 <div class="form-content" style="width: 80%;height: auto; margin-left: 10%; padding-top: 0;padding-bottom: 0;">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" name="txtFirstName" >
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="txtFirstName" required="">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" name="txtLastName">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="txtLastName" required="">
                     </div>
                     <div class="rdCheck" style="display: flex">
                         <div class="form-check">
@@ -106,24 +106,24 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" name="txtEmail" placeholder="name@example.com">
+                        <input type="email" class="form-control" id="exampleFormControlInput1" name="txtEmail" placeholder="name@example.com" required="">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="txtPassword" id="exampleFormControlInput1">
+                        <input type="password" class="form-control" name="txtPassword" id="exampleFormControlInput1" required="">
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">DOB</label>
-                        <input type="date" name="dob"/>(yyyy-MM-dd)<br/>
+                        <input type="date" name="dob" required=""/>(yyyy-MM-dd)<br/>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Number Phone</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" name="txtPhone" >
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="txtPhone" required="">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Address</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" name="ttAddress" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="ttAddress" rows="3" required=""></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Image</label>
@@ -133,7 +133,10 @@
                     <select class="form-select" name="slRole" aria-label="Default select example">
                         <!--<option value="0" selected>All</option>-->
                         <c:forEach items="${requestScope.roles}" var="role">
-                            <option selected="" value="${role.roleID}">${role.roleName}</option>
+                            <c:if test="${role.roleName != 'parent'}">
+                                <option selected="" value="${role.roleID}">${role.roleName}</option>
+                            </c:if>
+                            
                         </c:forEach>
                     </select>
                     <div class="d-grid gap-2 d-md-block" style="margin-top: 30px; margin-bottom: 30px; ;">
